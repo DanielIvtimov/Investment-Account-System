@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Client;
+use App\Services\TransactionService;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,11 +16,39 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $transactionService = app(TransactionService::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $ana = Client::create([
+            'name' => 'Ana',
         ]);
+
+        $transactionService->deposit($ana, '1000.00');
+
+        $transactionService->buy(
+            $ana,
+            'AAPL',
+            5,
+            '100.00'
+        );
+
+        $transactionService->sell(
+            $ana,
+            'AAPL',
+            3,
+            '120.00'
+        );
+
+        $bob = Client::create([
+            'name' => 'Bob',
+        ]);
+
+        $transactionService->deposit($bob, '500.00');
+
+        $transactionService->buy(
+            $bob,
+            'MSFT',
+            2,
+            '100.00'
+        );
     }
 }
