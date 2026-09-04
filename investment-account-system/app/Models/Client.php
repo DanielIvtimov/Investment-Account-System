@@ -32,7 +32,7 @@ class Client extends Model
         $sells = $this->transactions()
             ->where('type', TransactionType::Sell)
             ->sum('cash_amount');
-        
+
         $balance = bcadd($deposits, $sells, 2);
         $balance = bcsub($balance, $withdrawals, 2);
         $balance = bcsub($balance, $buys, 2);
@@ -53,7 +53,7 @@ class Client extends Model
             ->selectRaw('instrument_ticker, SUM(quantity) as quantity')
             ->pluck('quantity', 'instrument_ticker');
 
-        return $bought 
+        return $bought
             ->map(fn ($quantity, $ticker) => [
                 'instrument_ticker' => $ticker,
                 'quantity' => $quantity - ($sold[$ticker] ?? 0),

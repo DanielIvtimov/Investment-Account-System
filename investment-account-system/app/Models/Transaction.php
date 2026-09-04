@@ -25,7 +25,7 @@ class Transaction extends Model
         'price_per_unit' => 'decimal:4',
         'quantity' => 'integer',
     ];
-    
+
     public function client(): BelongsTo
     {
         return $this->belongsTo(Client::class);

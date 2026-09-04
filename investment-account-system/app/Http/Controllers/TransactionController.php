@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreDepositRequest;
-use App\Http\Requests\StoreWithdrawalRequest;
 use App\Http\Requests\StoreBuyRequest;
+use App\Http\Requests\StoreDepositRequest;
 use App\Http\Requests\StoreSellRequest;
+use App\Http\Requests\StoreWithdrawalRequest;
 use App\Models\Client;
 use App\Services\TransactionService;
 use Illuminate\Http\JsonResponse;
 
 class TransactionController extends Controller
 {
-    public function __construct(private readonly TransactionService $transactionService,)
-    {}
+    public function __construct(private readonly TransactionService $transactionService) {}
 
-    public function deposit(StoreDepositRequest $request, Client $client,): JsonResponse
-    {  
+    public function deposit(StoreDepositRequest $request, Client $client): JsonResponse
+    {
         $transaction = $this->transactionService->deposit($client, $request->validated('amount'));
 
         return response()->json([
@@ -40,7 +39,7 @@ class TransactionController extends Controller
             'created_at' => $transaction->created_at,
         ], 201);
     }
-    
+
     public function buy(StoreBuyRequest $request, Client $client): JsonResponse
     {
         $transaction = $this->transactionService->buy(

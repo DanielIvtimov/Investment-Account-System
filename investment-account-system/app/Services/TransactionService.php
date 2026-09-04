@@ -95,4 +95,3 @@ class TransactionService
         return bcadd(bcadd($value, '0.005', 4), '0', 2);
     }
 }
-

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedInteger('quantity')->nullable();
             $table->decimal('price_per_unit', 15, 4)->unsigned()->nullable();
 
-            // created_at only, no updated_at. 
+            // created_at only, no updated_at.
             $table->timestamp('created_at')->useCurrent();
             $table->index(['client_id', 'type']);
             $table->index(['client_id', 'instrument_ticker']);

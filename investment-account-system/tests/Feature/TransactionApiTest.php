@@ -420,7 +420,7 @@ class TransactionApiTest extends TestCase
             ->assertJsonPath('data.2.quantity', 2)
             ->assertJsonPath('data.2.cash_amount', '240.00');
     }
-    
+
     public function test_client_can_only_view_own_transaction_history(): void
     {
         $ana = Client::create([

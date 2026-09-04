@@ -10,6 +10,6 @@ Route::get('/clients/{client}', [ClientController::class, 'show']);
 Route::post('/clients/{client}/deposit', [TransactionController::class, 'deposit']);
 Route::post('/clients/{client}/withdraw', [TransactionController::class, 'withdraw']);
 Route::post('/clients/{client}/buy', [TransactionController::class, 'buy']);
-Route::post('/clients/{client}/sell', [TransactionController::class, 'sell']);  
+Route::post('/clients/{client}/sell', [TransactionController::class, 'sell']);
 
 Route::get('/clients/{client}/transactions', [TransactionController::class, 'index']);
